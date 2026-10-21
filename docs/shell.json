@@ -1,12 +1,14 @@
 {
+  "notice": "",
+  "rollback": false,
   "shell": {
-    "version": "0.2.1",
-    "url": "https://github.com/698081300-source/mumu-azurlane-helper/releases/download/v0.2.1/shell-0.2.1.zip",
-    "sha256": "133bca5368a81a3ede8ed3ecf3ec542acaeabb36e860b154b10e59b08c71112a",
+    "version": "0.2.2",
+    "url": "https://github.com/698081300-source/mumu-azurlane-helper/releases/download/v0.2.2/shell-0.2.2.zip",
+    "sha256": "85d0c2acc190417450e82c227fd285f61c87ddb3034dec6f127c8bbb6b19e710",
     "size": 241450,
     "rollout": 100,
-    "min_supported": "0.2.0",
-    "notes": "首个版本：活动缺失时提示更新 Alas（只换代码）"
+    "min_supported": "0.2.1",
+    "notes": "更新表改走 raw 优先（jsDelivr 会缓存几小时，新活动看不到）"
   },
   "alas": {
     "latest": "",
@@ -14,7 +16,5 @@
     "url": "https://alas.azurlane.cloud/",
     "note": "打开页面点「立即下载」就是完整包，装好就行"
   },
-  "events": [],
-  "notice": "",
-  "rollback": false
+  "events": []
 }

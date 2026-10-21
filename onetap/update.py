@@ -32,8 +32,8 @@ import uuid
 # **两个地址都要**：jsDelivr 国内更容易连上（但会缓存几小时），raw.githubusercontent 不缓存
 # （但国内有时连不上）—— 一个连不上就试下一个，全失败就当"没有更新"。
 INDEX_URLS: tuple[str, ...] = (
-    "https://cdn.jsdelivr.net/gh/698081300-source/mumu-azurlane-helper@main/docs/shell.json",
     "https://raw.githubusercontent.com/698081300-source/mumu-azurlane-helper/main/docs/shell.json",
+    "https://cdn.jsdelivr.net/gh/698081300-source/mumu-azurlane-helper@main/docs/shell.json",
 )
 TIMEOUT_S = 3
 DOWNLOAD_TIMEOUT_S = 60
