@@ -1,20 +1,13 @@
 {
   "shell": {
-    "version": "0.0.0",
-    "url": "",
-    "sha256": "",
-    "size": 0,
+    "version": "0.2.1",
+    "url": "https://github.com/698081300-source/mumu-azurlane-helper/releases/download/v0.2.1/shell-0.2.1.zip",
+    "sha256": "133bca5368a81a3ede8ed3ecf3ec542acaeabb36e860b154b10e59b08c71112a",
+    "size": 241450,
     "rollout": 100,
-    "min_supported": "0.0.0",
-    "notes": "尚未发布（跑 tools\\publish.py 会自动写这里）"
+    "min_supported": "0.2.0",
+    "notes": "首个版本：活动缺失时提示更新 Alas（只换代码）"
   },
-  "alas": {
-    "latest": "",
-    "broken": [],
-    "url": "https://alas.azurlane.cloud/",
-    "note": "打开页面点「立即下载」就是完整包，装好就行"
-  },
-  "events": [],
   "notice": "",
   "rollback": false
 }
