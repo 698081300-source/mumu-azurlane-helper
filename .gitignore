@@ -1,0 +1,11 @@
+# 打包产物 / 缓存 / 本机临时文件 —— 都不该进仓库
+dist/
+build/
+__pycache__/
+*.pyc
+shots/
+.codemaker/
+
+# 内部资料（公开仓库里不要出现：策略、需求记录、开发约定）
+AGENTS.md
+一键三星_需求记录.md

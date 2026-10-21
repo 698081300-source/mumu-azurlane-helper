@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MuMu 碧蓝助手 —— 一键三星</title>
+<style>
+  :root{--bg:#f2f3f5;--card:#fff;--line:#e3e5e8;--ink:#1f2329;--muted:#8a9099;--accent:#2563eb}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:16px/1.7 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
+  .wrap{max-width:720px;margin:0 auto;padding:56px 20px 80px}
+  h1{margin:0 0 8px;font-size:32px;letter-spacing:.5px}
+  .sub{color:var(--muted);margin:0 0 28px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+        padding:28px;margin:0 0 20px}
+  .btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;
+       padding:14px 34px;border-radius:10px;font-size:18px;font-weight:600}
+  .btn:hover{background:#1d4ed8}
+  .ver{color:var(--muted);font-size:14px;margin-top:12px}
+  ol{padding-left:22px;margin:0}
+  li{margin:8px 0}
+  code{background:#f4f5f7;padding:2px 6px;border-radius:6px;font-size:14px}
+  .q{font-weight:600;margin:18px 0 4px}
+  .a{color:#4b5563;margin:0 0 10px}
+  .foot{color:var(--muted);font-size:13px;text-align:center;margin-top:36px}
+  a{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>MuMu 碧蓝助手</h1>
+  <p class="sub">给《碧蓝航线》玩家的护肝小工具：点一下，三星到手。</p>
+
+  <div class="card" style="text-align:center">
+    <a class="btn" id="dl" href="https://github.com/CHANGE_ME/mumu-azurlane-helper/releases/latest">下载最新版</a>
+    <div class="ver" id="ver">当前版本：读取中…</div>
+  </div>
+
+  <div class="card">
+    <ol>
+      <li>解压到任意文件夹（<b>不要</b>放在 C 盘系统目录），双击 <code>MuMu碧蓝助手.exe</code></li>
+      <li>在 MuMu 里打开《碧蓝航线》，回到小窗填关卡（如 <code>12-4</code>），点「一键三星」</li>
+      <li>以后不用再下载 —— 工具会自己更新；有新版会在日志第一行提示</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <div class="q">需要自己装 Alas 吗？</div>
+    <p class="a">需要。这个壳只是把 Alas 用起来，<b>不包含也不修改</b> Alas。请先按 Alas 官方教程装好，壳会自动找到它。</p>
+
+    <div class="q">打不开 / 被杀毒软件拦？</div>
+    <p class="a">新版 Windows 可能会提示"未知发布者"，点「更多信息 → 仍要运行」即可。如果实在进不去，把 <code>%APPDATA%\MuMu碧蓝助手</code> 下最新的 <code>crash-*.log</code> 发给我。</p>
+
+    <div class="q">支持哪些玩法？</div>
+    <p class="a">只做三件事：一键三星过图、刷光石油、清日常（收获 / 委托 / 科研 / 后宅 / 白嫖奖励）。别的设置请直接开 Alas。</p>
+  </div>
+
+  <div class="foot">
+    个人开发的小工具，与 Alas、游戏官方均无隶属关系。
+  </div>
+</div>
+
+<script>
+fetch('./shell.json').then(r => r.json()).then(d => {
+  const v = d && d.shell && d.shell.version;
+  if (v) document.getElementById('ver').textContent = '当前版本：v' + v;
+}).catch(() => { document.getElementById('ver').textContent = '当前版本：见下载页'; });
+</script>
+</body>
+</html>
