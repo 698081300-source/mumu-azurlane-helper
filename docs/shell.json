@@ -2,13 +2,13 @@
   "notice": "",
   "rollback": false,
   "shell": {
-    "version": "0.2.2",
-    "url": "https://github.com/698081300-source/mumu-azurlane-helper/releases/download/v0.2.2/shell-0.2.2.zip",
-    "sha256": "85d0c2acc190417450e82c227fd285f61c87ddb3034dec6f127c8bbb6b19e710",
-    "size": 241450,
+    "version": "0.2.3",
+    "url": "https://github.com/698081300-source/mumu-azurlane-helper/releases/download/v0.2.3/shell-0.2.3.zip",
+    "sha256": "9a17d99c2955d54e7aa1867bf8d4bd7e51fed50b85b2a34a52c2f38baf5c95c1",
+    "size": 241259,
     "rollout": 100,
-    "min_supported": "0.2.1",
-    "notes": "更新表改走 raw 优先（jsDelivr 会缓存几小时，新活动看不到）"
+    "min_supported": "0.2.2",
+    "notes": "修复：整包附件名改成纯英文（GitHub 会丢中文）"
   },
   "alas": {
     "latest": "",
