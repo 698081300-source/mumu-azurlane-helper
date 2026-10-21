@@ -8,6 +8,13 @@
     "min_supported": "0.2.0",
     "notes": "首个版本：活动缺失时提示更新 Alas（只换代码）"
   },
+  "alas": {
+    "latest": "",
+    "broken": [],
+    "url": "https://alas.azurlane.cloud/",
+    "note": "打开页面点「立即下载」就是完整包，装好就行"
+  },
+  "events": [],
   "notice": "",
   "rollback": false
 }
