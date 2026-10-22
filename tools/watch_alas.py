@@ -210,7 +210,7 @@ def _event_files(folder: str) -> int:
     return sum(1 for x in data if str(x.get("name") or "").endswith(".py"))
 
 
-def _ci() -> int:
+def _ci(force: bool = False) -> int:
     """GitHub Actions 入口：决定这次要不要报告，要的话写进 `docs/alas-watch.md`。
 
     两条节奏（用户 2026-10-22 定）：
@@ -243,6 +243,8 @@ def _ci() -> int:
         report = bool(new_events or sha_changed)
     else:
         report = daily_due
+    if force:
+        report = True                 # 手动触发时的"发一条给我看看"
     if not report:
         return 0
 
@@ -381,7 +383,7 @@ def main(argv: list[str]) -> int:
         print(f"大节点模式：{'开（每 2 小时查，直到新活动出现）' if state['hot'] else '关（恢复每天一次）'}")
         return 0
     if "--ci" in argv:                        # GitHub Actions 里跑
-        return _ci()
+        return _ci(force="--force" in argv)
     sha, date, title = latest_commit()
     events = event_folders()
     now = recent(events)

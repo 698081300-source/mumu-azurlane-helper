@@ -8,7 +8,12 @@ name: 观察 Alas 上游
 on:
   schedule:
     - cron: "5 */2 * * *"        # 每 2 小时（UTC 整点后 5 分）
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 强制发一条报告（测试用）
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -31,7 +36,12 @@ jobs:
       - name: 查一次上游
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: python tools/watch_alas.py --ci
+        run: |
+          if [ "${{ inputs.force }}" = "true" ]; then
+            python tools/watch_alas.py --ci --force
+          else
+            python tools/watch_alas.py --ci
+          fi
 
       - name: 有变化就提交
         run: |
