@@ -5,7 +5,11 @@ __pycache__/
 *.pyc
 shots/
 .codemaker/
+onetap/park_state.json
 
 # 内部资料（公开仓库里不要出现：策略、需求记录、开发约定）
 AGENTS.md
 一键三星_需求记录.md
+代码改动汇总.md
+logs/
+al_bot/

@@ -100,8 +100,14 @@ def ensure_full(version: str) -> Path:
 
 
 def pack_full(version: str) -> Path:
-    """把 `dist\\MuMu碧蓝助手\\` 压成给新用户下载的整包（里面第一层就是 `MuMu碧蓝助手\\`）。"""
-    out = DIST / f"MuMu碧蓝助手-{version}.zip"
+    """把 `dist\\MuMu碧蓝助手\\` 压成给新用户下载的整包（里面第一层就是 `MuMu碧蓝助手\\`）。
+
+    **压缩包文件名必须是纯 ASCII**（`mumu-azurlane-helper-<版本>.zip`）：
+    GitHub 的附件名会丢掉非 ASCII 字符 —— 2026-10-21 实测 `MuMu碧蓝助手-0.2.2.zip`
+    传上去变成了 `MuMu.-0.2.2.zip`（中文全没了，连分隔的 `-` 都跟着变形）。
+    里面解出来的目录名照旧是中文，用户看不出区别。
+    """
+    out = DIST / f"mumu-azurlane-helper-{version}.zip"
     out.unlink(missing_ok=True)
     with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as zf:
         for path in sorted(FULL_DIR.rglob("*")):
@@ -121,11 +127,16 @@ def load_config() -> tuple[str, str]:
 
 
 def write_index_urls(repo: str, branch: str) -> None:
-    """把壳读取的地址换成这个仓库的（jsDelivr 优先，raw 兜底）。"""
+    """把壳读取的地址换成这个仓库的（**raw 优先，jsDelivr 兜底**）。
+
+    顺序为什么是这样（2026-10-21 实测）：jsDelivr 对 `@main` 这种分支引用**会缓存几小时**，
+    我们刚改完 `events` 它还在发旧的 → 用户看不到新活动。raw 基本不缓存（几分钟），
+    所以 raw 先试；raw 在国内偶尔连不上时再退回 jsDelivr（那时旧一点也能用）。
+    """
     text = UPDATE.read_text(encoding="utf-8")
     block = (f'INDEX_URLS: tuple[str, ...] = (\n'
-             f'    "https://cdn.jsdelivr.net/gh/{repo}@{branch}/docs/shell.json",\n'
              f'    "https://raw.githubusercontent.com/{repo}/{branch}/docs/shell.json",\n'
+             f'    "https://cdn.jsdelivr.net/gh/{repo}@{branch}/docs/shell.json",\n'
              f')\n')
     text = re.sub(r"INDEX_URLS: tuple\[str, \.\.\.\] = \(\n(?:.*\n)*?\)\n", block, text)
     UPDATE.write_text(text, encoding="utf-8")
