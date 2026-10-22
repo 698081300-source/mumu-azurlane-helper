@@ -122,6 +122,8 @@ def check(current: str, skip: set[str] | None = None) -> dict | None:
         return None
     return {"version": version,
             "url": url,
+            "mirrors": [str(x).strip() for x in (shell.get("mirrors") or [])
+                        if str(x).strip()],
             "notes": str(shell.get("notes") or "").strip(),
             "sha256": str(shell.get("sha256") or "").strip(),
             "size": _as_int(shell.get("size")),
@@ -203,37 +205,48 @@ def alas_download() -> tuple[str, str]:
     return url, note
 
 
-def download(url: str, dest, sha256: str = "", size: int = 0):
+def download(url, dest, sha256: str = "", size: int = 0):
     """下到 `dest`，**校验 sha256 / 字节数**，校验不过就删掉并抛 `UpdateError`。
+
+    `url` 可以是字符串，也可以是**地址列表** —— 一个一个试，第一个成功就收工
+    （2026-10-22 实机：Release 的下载地址会跳到 objects.githubusercontent.com，
+     国内常常连不上；而仓库里的 raw 文件能连。所以每个包都给几个备用地址）。
 
     为什么要校验（照抄 MAA 的做法）：CDN 可能缓存了旧文件、用户的网可能被中间人插一脚、
     下载可能半途断掉 —— 这三种都会在"换代码"时变成"工具打不开了"，代价太大，几十字节换不起吗。
     """
+    urls = [url] if isinstance(url, str) else [u for u in url if u]
     dest.parent.mkdir(parents=True, exist_ok=True)
     tmp = dest.with_name(dest.name + ".part")
-    digest = hashlib.sha256()
-    got = 0
-    try:
-        with urllib.request.urlopen(url, timeout=DOWNLOAD_TIMEOUT_S) as resp, \
-                tmp.open("wb") as fh:
-            while True:
-                chunk = resp.read(65536)
-                if not chunk:
-                    break
-                fh.write(chunk)
-                digest.update(chunk)
-                got += len(chunk)
-    except OSError as exc:
-        tmp.unlink(missing_ok=True)
-        raise UpdateError(f"下载新版失败：{exc}") from exc
-    if sha256 and digest.hexdigest().lower() != sha256.lower():
-        tmp.unlink(missing_ok=True)
-        raise UpdateError("下载的包校验不过（可能是 CDN 缓存了旧文件），这次先不更新")
-    if size and got != size:
-        tmp.unlink(missing_ok=True)
-        raise UpdateError(f"下载的包大小不对（{got} ≠ {size} 字节），这次先不更新")
-    tmp.replace(dest)
-    return dest
+    last: Exception | None = None
+    for one in urls:
+        digest = hashlib.sha256()
+        got = 0
+        try:
+            with urllib.request.urlopen(one, timeout=DOWNLOAD_TIMEOUT_S) as resp, \
+                    tmp.open("wb") as fh:
+                while True:
+                    chunk = resp.read(65536)
+                    if not chunk:
+                        break
+                    fh.write(chunk)
+                    digest.update(chunk)
+                    got += len(chunk)
+        except OSError as exc:
+            tmp.unlink(missing_ok=True)
+            last = exc
+            continue                      # 换下一个地址
+        if sha256 and digest.hexdigest().lower() != sha256.lower():
+            tmp.unlink(missing_ok=True)
+            last = UpdateError("下载的包校验不过（可能是 CDN 缓存了旧文件），这次先不更新")
+            continue
+        if size and got != size:
+            tmp.unlink(missing_ok=True)
+            last = UpdateError(f"下载的包大小不对（{got} ≠ {size} 字节），这次先不更新")
+            continue
+        tmp.replace(dest)
+        return dest
+    raise UpdateError(f"下载新版失败：{last}")
 
 
 def newer(latest: str, current: str) -> bool:
