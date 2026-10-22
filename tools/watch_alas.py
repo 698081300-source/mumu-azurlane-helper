@@ -50,26 +50,36 @@ def api(path: str) -> object:
         return json.loads(resp.read().decode("utf-8"))
 
 
-def latest_commit() -> tuple[str, str, str]:
-    """`(短 sha, 日期, 标题)` —— 只读一次，不翻历史。
+def _bj(iso: str) -> str:
+    """UTC 的 ISO 时间 → 北京时间 `YYYY-MM-DD`。
 
-    日期按**本机时区**算：GitHub 给的是 UTC，`10-19T20:38Z` 其实是北京时间 10-20
-    （不换算会看着像"上游还停在 19 号"，白纠结半天）。
+    **不能用"本机时区"**：GitHub Actions 跑在 UTC 上，用 `astimezone()` 会得到
+    前一天（2026-10-19T20:38Z 其实已经是北京 10-20 凌晨），看着像"上游没更新"。
     """
+    import datetime
+    if not iso:
+        return ""
+    try:
+        moment = datetime.datetime.fromisoformat(iso.replace("Z", "+00:00"))
+    except ValueError:
+        return iso[:10]
+    return moment.astimezone(datetime.timezone(datetime.timedelta(hours=8))).strftime("%Y-%m-%d")
+
+
+def _now_bj() -> str:
+    import datetime
+    return datetime.datetime.now(
+        datetime.timezone(datetime.timedelta(hours=8))).strftime("%Y-%m-%d %H:%M")
+
+
+def latest_commit() -> tuple[str, str, str]:
+    """`(短 sha, 北京时间日期, 标题)` —— 只读一次，不翻历史。"""
     data = api("/commits?sha=master&per_page=1")
     if not isinstance(data, list) or not data:
         return "", "", ""
     item = data[0]
     raw = str(item.get("commit", {}).get("author", {}).get("date", ""))
-    day = ""
-    if raw:
-        try:
-            import datetime
-            day = (datetime.datetime.fromisoformat(raw.replace("Z", "+00:00"))
-                   .astimezone().strftime("%Y-%m-%d"))
-        except ValueError:
-            day = raw[:10]
-    return (str(item.get("sha", ""))[:7], day,
+    return (str(item.get("sha", ""))[:7], _bj(raw),
             str(item.get("commit", {}).get("message", "")).splitlines()[0][:60])
 
 
@@ -248,7 +258,7 @@ def _ci(force: bool = False) -> int:
     if not report:
         return 0
 
-    lines = [f"## {datetime.datetime.now():%Y-%m-%d %H:%M}", ""]
+    lines = [f"## {_now_bj()}（北京时间）", ""]
     old = state.get("last_sha") or ""
     if sha_changed:
         lines.append(f"上游：{old[:7] or '（首次）'} → **{sha}**（{date}）{title}")
