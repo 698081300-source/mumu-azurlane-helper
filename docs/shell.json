@@ -2,13 +2,13 @@
   "notice": "",
   "rollback": false,
   "shell": {
-    "version": "0.2.3",
-    "url": "https://github.com/698081300-source/mumu-azurlane-helper/releases/download/v0.2.3/shell-0.2.3.zip",
-    "sha256": "9a17d99c2955d54e7aa1867bf8d4bd7e51fed50b85b2a34a52c2f38baf5c95c1",
-    "size": 241259,
+    "version": "0.2.4",
+    "url": "https://github.com/698081300-source/mumu-azurlane-helper/releases/download/v0.2.4/shell-0.2.4.zip",
+    "sha256": "16ce7b30cb176b2e27a417ce52651287a1cb86b9cfacad9565454900dc73f517",
+    "size": 241915,
     "rollout": 100,
-    "min_supported": "0.2.2",
-    "notes": "修复：整包附件名改成纯英文（GitHub 会丢中文）"
+    "min_supported": "0.2.3",
+    "notes": "修了船坞满时刷屏、还误报「未达成」的问题"
   },
   "alas": {
     "latest": "",
