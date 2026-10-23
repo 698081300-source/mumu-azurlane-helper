@@ -15,10 +15,15 @@
     "notes": "新版本的下载地址改走国内能连的线路（之前下不下来）"
   },
   "alas": {
-    "latest": "",
+    "latest": "2026-10-23",
     "broken": [],
     "url": "https://alas.azurlane.cloud/",
     "note": "打开页面点「立即下载」就是完整包，装好就行"
   },
-  "events": []
+  "events": [
+    {
+      "id": "event_20261022_cn",
+      "name": "飓风与雾霭回廊"
+    }
+  ]
 }
