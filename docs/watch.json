@@ -1,9 +1,10 @@
 {
-  "last_sha": "2fc8c1c",
+  "last_sha": "4d88c22",
   "known_events": [
+    "event_20261022_cn",
     "event_20260908_cn"
   ],
-  "last_daily": "2026-10-22",
+  "last_daily": "2026-10-23",
   "hot": false,
   "hot_since": ""
 }
