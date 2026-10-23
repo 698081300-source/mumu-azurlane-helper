@@ -2,17 +2,17 @@
   "notice": "",
   "rollback": false,
   "shell": {
-    "version": "0.2.8",
-    "url": "https://raw.githubusercontent.com/698081300-source/mumu-azurlane-helper/main/docs/shell-0.2.8.zip",
+    "version": "0.2.9",
+    "url": "https://raw.githubusercontent.com/698081300-source/mumu-azurlane-helper/main/docs/shell-0.2.9.zip",
     "mirrors": [
-      "https://cdn.jsdelivr.net/gh/698081300-source/mumu-azurlane-helper@main/docs/shell-0.2.8.zip",
-      "https://github.com/698081300-source/mumu-azurlane-helper/releases/download/v0.2.8/shell-0.2.8.zip"
+      "https://cdn.jsdelivr.net/gh/698081300-source/mumu-azurlane-helper@main/docs/shell-0.2.9.zip",
+      "https://github.com/698081300-source/mumu-azurlane-helper/releases/download/v0.2.9/shell-0.2.9.zip"
     ],
-    "sha256": "71ab1f9ef452890b9e39a9d4521c9c002a0e4dccc951501cfd2e1441ac17e899",
-    "size": 248075,
+    "sha256": "b3429896e0e708cc8294986bc16d6b3481dce7edf7cfce7f8de627cb35101278",
+    "size": 249119,
     "rollout": 100,
-    "min_supported": "0.2.7",
-    "notes": "游戏出新活动时，助手会自己把 Alas 更新好，不用你动手"
+    "min_supported": "0.2.8",
+    "notes": "修复活动关卡（T1 / T2 … T6）选不了的问题"
   },
   "alas": {
     "latest": "2026-10-23",
