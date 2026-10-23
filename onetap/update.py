@@ -35,7 +35,7 @@ INDEX_URLS: tuple[str, ...] = (
     "https://raw.githubusercontent.com/698081300-source/mumu-azurlane-helper/main/docs/shell.json",
     "https://cdn.jsdelivr.net/gh/698081300-source/mumu-azurlane-helper@main/docs/shell.json",
 )
-TIMEOUT_S = 3
+TIMEOUT_S = 10           # 读表：raw 在国内首次访问常常 3~8 秒，3 秒会把"有新版"判成"没有"
 DOWNLOAD_TIMEOUT_S = 60
 
 
@@ -44,6 +44,19 @@ class UpdateError(RuntimeError):
 
 
 _cache: dict | None = None
+LAST_SOURCE = ""        # 这张表是从哪条线路读到的（排错用，见 `source_label()`）
+
+
+def source_label(url: str) -> str:
+    """把地址归成人看得懂的线路名（写进导出日志，别的都不写）。"""
+    url = (url or "").lower()
+    if "raw.githubusercontent" in url:
+        return "raw"
+    if "jsdelivr" in url:
+        return "jsDelivr"
+    if "releases/download" in url:
+        return "GitHub Release"
+    return url or "（未知）"
 
 
 def _override() -> dict:
@@ -68,7 +81,7 @@ def _override() -> dict:
 
 def index(force: bool = False) -> dict | None:
     """读线上那张表（一次运行只读一次，按 `INDEX_URLS` 顺序试）。**任何异常都当"没有"**。"""
-    global _cache
+    global _cache, LAST_SOURCE
     if _cache is not None and not force:
         return _cache
     for url in INDEX_URLS:
@@ -79,8 +92,10 @@ def index(force: bool = False) -> dict | None:
             continue
         if isinstance(data, dict) and data:
             _cache = data
+            LAST_SOURCE = source_label(url)
             return _cache
     _cache = {}
+    LAST_SOURCE = ""
     return _cache
 
 
