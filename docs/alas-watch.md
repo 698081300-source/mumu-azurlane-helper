@@ -2,6 +2,24 @@
 
 每天一次；大节点期间每 2 小时一次。
 
+## 2026-10-25 08:15（北京时间）
+
+上游：4d88c22 → **b7bcb1b**（2026-10-25）Merge pull request #6081 from LmeSzinc/bug_fix
+
+**这次动了什么**（9 个提交）
+
+- `Test: add offline screenshot infrastructure`
+- `Test: rewrite island coverage around screenshot goldens`
+- `Fix: recover truncated island emotion limits`
+- `Fix: recognize historical island restaurant products`
+- `Fix: restore English island task name spacing`
+- 主界面/任务调度：module/handler/assets.py
+- 大世界·岛屿（与我们无关）：module/island_handler/dock_scanner.py、module/island_handler/restaurant.py
+- 测试（与我们无关）：tests/island/test_business.py、tests/island/test_collect.py、tests/island/test_freebie.py…
+- 其它：.gitignore、assets/en/handler/STRATEGY_OPENED.BUTTON.png、assets/island/character/Taihou.png…
+
+**跟我们有关吗**：⚠️ 有关，建议看一眼
+
 ## 2026-10-24 08:32（北京时间）
 
 上游没新提交：4d88c22（2026-10-23）
