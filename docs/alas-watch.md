@@ -2,6 +2,24 @@
 
 每天一次；大节点期间每 2 小时一次。
 
+## 2026-10-27 09:25（北京时间）
+
+上游：fe83021 → **02f8265**（2026-10-27）Merge pull request #6086 from LmeSzinc/bug_fix
+
+**这次动了什么**（8 个提交）
+
+- `Opt: use milp as backend for production_plan_calculator`
+- `Refactor: island production planner to be reused for island transport`
+- `Add: [CN, JP] island transport`
+- `Add: [EN] island transport`
+- `Fix: always handle info bar after shop_refresh`
+- 配置字段（我们写的 7 个值）：module/config/argument/args.json、module/config/argument/menu.json、module/config/argument/override.yaml…
+- 大世界·岛屿（与我们无关）：module/island_handler/highs.py、module/island_handler/milp.py、module/island_handler/production_plan_calculator.py…
+- 测试（与我们无关）：tests/island/transport/test_transport_list_screenshots.py、tests/island/transport/test_transport_policy.py、tests/island/transport/test_transport_refresh.py…
+- 其它：alas.py、assets/cn/island/ISLAND_TRANSPORT_CLAIM.png、assets/cn/island/ISLAND_TRANSPORT_DETAIL_CLOSE.BUTTON.png…
+
+**跟我们有关吗**：⚠️ 有关，建议看一眼
+
 ## 2026-10-26 08:09（北京时间）
 
 上游：b7bcb1b → **fe83021**（2026-10-25）Merge pull request #6082 from LmeSzinc/bug_fix
