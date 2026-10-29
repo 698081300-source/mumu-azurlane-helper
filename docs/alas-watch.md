@@ -2,6 +2,23 @@
 
 每天一次；大节点期间每 2 小时一次。
 
+## 2026-10-29 13:36（北京时间）
+
+上游：02f8265 → **672aeed**（2026-10-29）Merge pull request #6091 from LmeSzinc/bug_fix
+
+**这次动了什么**（5 个提交）
+
+- `Upd: Island Transport templates`
+- `Fix: island collect should wait dock loading`
+- `Revert "Tmp: Skip minigame before game client patches"`
+- `Add: swipe for detecting supply pack not in the first page`
+- `Merge pull request #6091 from LmeSzinc/bug_fix`
+- 大世界·岛屿（与我们无关）：module/island_handler/dock.py
+- 测试（与我们无关）：tests/island/transport/test_transport_list_screenshots.py
+- 其它：assets/island/transport/Saltwater_Fish_Meat_2.png、module/freebies/supply_pack.py、module/island/collect.py…
+
+**跟我们有关吗**：无关（改的是别的东西）
+
 ## 2026-10-28 09:12（北京时间）
 
 上游没新提交：02f8265（2026-10-27）
