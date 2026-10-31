@@ -2,6 +2,25 @@
 
 每天一次；大节点期间每 2 小时一次。
 
+## 2026-10-31 13:25（北京时间）
+
+上游：672aeed → **163887a**（2026-10-30）Merge pull request #6099 from LmeSzinc/bug_fix
+
+**这次动了什么**（7 个提交）
+
+- `Refactor: island dock`
+- `Feat: allow using high emotion character for island production`
+- `Feat: remove redundant island production empty slot check`
+- `Fix: island exchange should end after handling get items`
+- `Fix: IslandProductionPlanner should inherit a ModuleBase`
+- 关卡数据（新活动/新图）：campaign/Readme.md
+- 配置字段（我们写的 7 个值）：module/config/argument/args.json、module/config/argument/argument.yaml、module/config/config_generated.py…
+- 大世界·岛屿（与我们无关）：module/island_handler/dock.py、module/island_handler/exchange.py、module/island_handler/production_planner.py…
+- 测试（与我们无关）：tests/dev_tools/test_island_extractor.py、tests/island/test_business_scheduling.py、tests/island/test_dock_selection.py…
+- 其它：assets/island/character/Workerjuu.png、config/template.json、dev_tools/island_extractor.py…
+
+**跟我们有关吗**：⚠️ 有关，建议看一眼
+
 ## 2026-10-30 13:35（北京时间）
 
 上游没新提交：672aeed（2026-10-29）
